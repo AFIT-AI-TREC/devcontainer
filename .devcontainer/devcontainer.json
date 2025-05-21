@@ -1,0 +1,43 @@
+{
+    // This file contains the devcontainer configuration used to create the Docker container for the TensorFlow GPU Development environment.
+    // For more information, see the documentation: https://code.visualstudio.com/docs/remote/docker#_customize-the-devcontainerjson-schema
+    // For more information on the Dockerfile used to create the container, see the Dockerfile
+    // This functionally passes arguments to `docker run` and `docker build` commands.
+    // It also includes settings for Visual Studio Code, such as extensions to install and settings to apply.
+    "name": "TensorFlow GPU Development",
+    // "dockerComposeFile": "docker-compose.yml",
+    "image": "afitaitrec/afitaitrec:latest",
+    // "service": "dev",
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        {
+            "source": "${localWorkspaceFolder}",
+            "target": "/workspace",
+            "type": "bind"
+        }
+    ],
+    // "remoteUser": "developer",
+    // "updateRemoteUserUID": true,
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/bin/python3",
+                "python.linting.enabled": true,
+                "python.formatting.provider": "black",
+                "jupyter.alwaysTrustNotebooks": true
+            },
+            "extensions": [
+                "ms-python.python",
+                "vscode-icons-team.vscode-icons",
+                "ms-toolsai.jupyter",
+                "gruntfuggly.todo-tree",
+                "ms-python.debugpy",
+                "ms-azuretools.vscode-docker",
+                "ms-python.black-formatter",
+                "ms-python.flake8",
+                "njpwerner.autodocstring",
+                "mechatroner.rainbow-csv"
+            ]
+        }
+    }
+}

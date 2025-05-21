@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aitrec-toolbox"
+version = "0.1.0"
+description = "Docker image for TensorFlow GPU development, now installable."
+authors = [
+    { name = "AI TREC", email = "afit.en.aitrec@us.af.mil" }
+]
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "opencv-python",
+    "scikit-learn",
+    "seaborn",
+    "tqdm",
+    "plotly",
+    "gif",
+    "ray[data,train,tune,serve]",
+    "optuna",
+    "hyperopt",
+    "tensorflow[and-cuda]",
+    "tensorflow_datasets",
+    "torch",
+    "torch-geometric"
+]

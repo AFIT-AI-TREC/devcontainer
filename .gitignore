@@ -1,0 +1,4 @@
+# This file is used to specify files and directories to be ignored by Git
+# It is important to ignore the .env file, which contains sensitive information 
+# such as sudo passwords that are used at buildtime and should not be committed to the repository.
+.env

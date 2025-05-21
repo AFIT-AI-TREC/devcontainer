@@ -1,0 +1,14 @@
+# Additional requirements for Reinforcement Learning
+ray[all]
+optuna
+gymnasium
+pettingzoo
+stable-baselines3
+rl_zoo3
+sb3-contrib
+sbx-rl
+wandb
+tinyscaler
+supersuit
+autorom
+flappy-bird-gymnasium==0.4.0

@@ -1,0 +1,38 @@
+# version: '3'
+# This file is used to define the services and configurations for Docker Compose.
+# This may be used to run the containerized environment with GPU support.
+# This functionaly serves as a way to pass many arguments to `docker run` in a more readable and maintainable format.
+services:
+  dev:
+    build:
+      context: . 
+      dockerfile: Dockerfile
+      # args:
+      #   - DEV_PW=${DEV_PW}
+    image: tfgpu-image
+    # ipc: host
+    stdin_open: true
+    tty: true
+    # env_file: .env
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    # user: developer
+    shm_size: '2gb'
+    # healthcheck:
+    #   test: ["CMD", "ls", "/dev/nvidia0"]
+    #   interval: 300s
+    #   timeout: 10s
+    #   retries: 3
+    volumes:
+      - ..:/workspace
+      - keras_cache:/home/developer/.keras
+      - tf_datasets:/home/developer/tensorflow_datasets
+
+volumes:
+  keras_cache:
+  tf_datasets:

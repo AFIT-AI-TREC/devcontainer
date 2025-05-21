@@ -1,0 +1,23 @@
+# Python requirements for a Tensorflow and PyTorch project
+numpy
+pandas
+opencv-python-headless
+matplotlib
+opencv-python
+scikit-learn
+seaborn
+tqdm
+pytest
+plotly
+gif
+nbformat
+moviepy
+ffmpeg-python
+tensorboard-plugin-customizable-plots
+ray[data,train,tune,serve]
+optuna
+hyperopt
+tensorflow[and-cuda]
+tensorflow_datasets
+torch
+torch-geometric
