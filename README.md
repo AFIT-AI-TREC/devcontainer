@@ -1,6 +1,10 @@
 # Purpose
 This is a baseline for a docker container for Tensorflow based Machine Learning research meant to run on a local host machine in Windows or Linux. 
 
+Most users should `docker pull` the image rather than build. Images available at:
+
+[Docker Hub afitaitrec/afitaitrec](https://hub.docker.com/r/afitaitrec/afitaitrec)
+
 # Usage
 The host machine should have Docker installed with 100GB+ free disk space. Optionally, VSCode should be installed to use as a 'devcontainer'. 
 
