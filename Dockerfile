@@ -14,7 +14,7 @@ ENV     NVIDIA_DRIVER_CAPABILITIES=compute,utility
 
 LABEL   maintainer="AI TREC"
 LABEL   description="Machine Learning Development Container"
-LABEL   version="1.0"
+LABEL   version="1.1"
 
 # Remove apt cache which may be stale configs
 RUN     rm -f /etc/apt/apt.conf.d/docker-clean
@@ -49,33 +49,19 @@ RUN	apt update --fix-missing && apt-get --no-install-recommends install -y \
 
 # Install Python packages
 FROM    base AS dev
-# ENV     PYTHONPATH="${PYTHONPATH}:/root/.local/bin"
+ARG     INSTALL_RL=false
 COPY    requirements.txt /tmp/requirements.txt
-RUN	python -m pip install --upgrade pip && \
-        pip install --requirement /tmp/requirements.txt
+COPY    rl_requirements.txt /tmp/rl_requirements.txt
+RUN     python -m pip install --upgrade pip && \
+        pip install --requirement /tmp/requirements.txt && \
+        if [ "$INSTALL_RL" = "true" ]; then \
+            pip install --requirement /tmp/rl_requirements.txt; \
+        fi
 
-# FROM dev AS devrl
-# COPY    rl_requirements.txt /tmp/rl_requirements.txt
-# RUN	python -m pip install --upgrade pip && \
-#         pip install --requirement /tmp/rl_requirements.txt
-
-# If needed, add a user and data caching folders
-# If the host has admin privileges, not needed usually
-# RUN     groupadd -g 1000 developer && \
-#         useradd -m --uid 1000 --gid 1000 developer
-# ARG     DEV_PW
-# RUN     echo "developer:${DEV_PW}" | chpasswd
-# RUN     adduser developer sudo
-# RUN     mkdir -p /home/developer/.keras /home/developer/tensorflow_datasets /opt/project && \
-#         chown -R 1000:1000 /home/developer /opt/project
-# RUN     mkdir -p /home/developer/.keras /home/developer/tensorflow_datasets /opt/project /workspace && \
-#         chown -R developer:developer /home/developer /opt/project /workspace && \
-#         chmod -R 755 /home/developer /opt/project /workspace
-# USER    developer
-
-# Set the working directory default
+# Add user and set the working directory default
 FROM    dev AS final
-# FROM    devrl AS final
+RUN     useradd -ms /bin/bash vscode \
+        && echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/90-cloud-init-users
 RUN     mkdir -p /opt/project /workspace
 WORKDIR /workspace
 

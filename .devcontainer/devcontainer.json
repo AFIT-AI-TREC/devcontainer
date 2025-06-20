@@ -4,27 +4,55 @@
     // For more information on the Dockerfile used to create the container, see the Dockerfile
     // This functionally passes arguments to `docker run` and `docker build` commands.
     // It also includes settings for Visual Studio Code, such as extensions to install and settings to apply.
-    "name": "TensorFlow GPU Development",
+    "name": "AI/ML Development Container",
     // "dockerComposeFile": "docker-compose.yml",
-    "image": "afitaitrec/afitaitrec:latest",
     // "service": "dev",
+    //////////////
+    // Change the following to the appropriate tag,
+    // e.g. "latest", "latest-rl", "1.1", "1.1-rl", etc.
+    "image": "afitaitrec/afitaitrec:latest-rl",
+    //////////////
     "workspaceFolder": "/workspace",
     "mounts": [
-        {
-            "source": "${localWorkspaceFolder}",
-            "target": "/workspace",
-            "type": "bind"
-        }
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+        // Mount SSH folder for Linux hosts
+        // "source=${env:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
     ],
-    // "remoteUser": "developer",
-    // "updateRemoteUserUID": true,
+    //////////////
+    // Comment out the following to not use the NVIDIA runtime.
+    // This is required for GPU support.
+    "runArgs": [
+        // Use the NVIDIA runtime for GPU support
+        "--gpus", "all",
+        // Increase the shared memory size to avoid issues with large datasets
+        "--shm-size", "8g" // Recommended at 1/3-1/2 of the host RAM
+    ],
+    //////////////
+    // Uncomment the following lines to use a user (vscode),
+    // Comment them out to use the root user.
+    "remoteUser": "vscode",
+    "updateRemoteUserUID": true,
+    //////////////
     "customizations": {
         "vscode": {
             "settings": {
                 "python.defaultInterpreterPath": "/usr/bin/python3",
+                // Comment out if the python linting is annoying (ie. too many warnings)
                 "python.linting.enabled": true,
-                "python.formatting.provider": "black",
-                "jupyter.alwaysTrustNotebooks": true
+                "python.linting.pylintEnabled": true,
+                "python.linting.flake8Enabled": true,
+                "python.linting.pylintArgs": ["--max-line-length=88"],
+                "flake8.args": ["--max-line-length=88"], // for black compatibility
+                "jupyter.alwaysTrustNotebooks": true,
+                // Set Python working directory to VS Code workspace folder
+                // "python.envFile": "${workspaceFolder}/.env",
+                "python.terminal.executeInFileDir": false,
+                "python.terminal.cwd": "${workspaceFolder}",
+                // Comment this out if you don't want to use the black formatter
+                "[python]": {
+                    "editor.defaultFormatter": "ms-python.black-formatter",
+                    "editor.formatOnSave": true
+                }
             },
             "extensions": [
                 "ms-python.python",

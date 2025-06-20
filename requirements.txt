@@ -1,4 +1,7 @@
 # Python requirements for a Tensorflow and PyTorch project
+pytest
+pytest-cov
+pylint
 numpy
 pandas
 opencv-python-headless
@@ -7,7 +10,6 @@ opencv-python
 scikit-learn
 seaborn
 tqdm
-pytest
 plotly
 gif
 nbformat
