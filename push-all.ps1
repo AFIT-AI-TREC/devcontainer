@@ -8,16 +8,13 @@ param(
 
 # Tag images with version
 
-docker tag afitaitrec/afitaitrec:latest afitaitrec/afitaitrec:$Version
-
-docker tag afitaitrec/afitaitrec:latest-rl afitaitrec/afitaitrec:"$Version-rl"
+docker tag afitaitrec/afitaitrec:latest-torch afitaitrec/afitaitrec:$Version-torch
+# docker tag afitaitrec/afitaitrec:latest-rl afitaitrec/afitaitrec:"$Version-rl"
 
 # Push both latest and versioned tags
 
-docker push afitaitrec/afitaitrec:latest
+docker push afitaitrec/afitaitrec:latest-torch
+docker push afitaitrec/afitaitrec:$Version-torch
 
-docker push afitaitrec/afitaitrec:$Version
-
-docker push afitaitrec/afitaitrec:latest-rl
-
-docker push afitaitrec/afitaitrec:"$Version-rl"
+# docker push afitaitrec/afitaitrec:latest-rl
+# docker push afitaitrec/afitaitrec:"$Version-rl"
