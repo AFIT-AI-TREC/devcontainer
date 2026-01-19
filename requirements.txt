@@ -9,3 +9,5 @@ pillow
 numpy
 optuna
 statsmodels
+seaborn
+wandb
