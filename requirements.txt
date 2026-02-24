@@ -17,7 +17,7 @@ torchvision
 ray[tune,rllib]
 tokenizers
 # --- Reinforcement Learning ---
-stable-baselines3
+stable-baselines3[extra]
 sb3-contrib
 gymnasium[classic-control]
 pygame
@@ -27,6 +27,6 @@ shimmy
 tinyscaler
 moviepy
 ale-py
-flappy-bird-gymnasium
+flappy-bird-gymnasium==0.4.0
 minigrid
 highway-env
