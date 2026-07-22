@@ -8,18 +8,22 @@ if [ -z "$1" ]; then
 fi
 VERSION=$1
 
-# Tag images with version
+# Tag and push CUDA 13.0 (default latest-torch)
+echo "Tagging and pushing CUDA 13.0 images..."
+docker tag afitaitrec/afitaitrec:latest-torch afitaitrec/afitaitrec:${VERSION}-torch
+docker push afitaitrec/afitaitrec:latest-torch
+docker push afitaitrec/afitaitrec:${VERSION}-torch
 
-docker tag afitaitrec/afitaitrec:latest afitaitrec/afitaitrec:$VERSION
+# Tag and push CUDA 12.8
+echo "Tagging and pushing CUDA 12.8 images..."
+docker tag afitaitrec/afitaitrec:latest-torch-cuda12.8 afitaitrec/afitaitrec:${VERSION}-torch-cuda12.8
+docker push afitaitrec/afitaitrec:latest-torch-cuda12.8
+docker push afitaitrec/afitaitrec:${VERSION}-torch-cuda12.8
 
-docker tag afitaitrec/afitaitrec:latest-rl afitaitrec/afitaitrec:${VERSION}-rl
+# Tag and push CUDA 12.6
+echo "Tagging and pushing CUDA 12.6 images..."
+docker tag afitaitrec/afitaitrec:latest-torch-cuda12.6 afitaitrec/afitaitrec:${VERSION}-torch-cuda12.6
+docker push afitaitrec/afitaitrec:latest-torch-cuda12.6
+docker push afitaitrec/afitaitrec:${VERSION}-torch-cuda12.6
 
-# Push both latest and versioned tags
-
-docker push afitaitrec/afitaitrec:latest
-
-docker push afitaitrec/afitaitrec:$VERSION
-
-docker push afitaitrec/afitaitrec:latest-rl
-
-docker push afitaitrec/afitaitrec:${VERSION}-rl
+echo "All images pushed successfully!"
