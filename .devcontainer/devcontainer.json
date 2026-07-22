@@ -43,7 +43,7 @@
         "vscode": {
             "settings": {
                 "files.eol": "\n",
-                "python.defaultInterpreterPath": "/opt/conda/bin/python3",
+                "python.defaultInterpreterPath": "/usr/bin/python",
                 // Comment out if the python linting is annoying (ie. too many warnings)
                 "python.linting.enabled": true,
                 "python.linting.pylintEnabled": true,
